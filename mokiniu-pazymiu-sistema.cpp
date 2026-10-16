@@ -10,6 +10,7 @@ int meniuPasirinkimas;
 
 string Mokiniai[100];
 int Pazymiai [100][10];
+int mokiniuSkaicius = 0;
 
 do {
 cout << "Mokiniu pazymiu zurnalas" << endl;
@@ -29,8 +30,28 @@ cin >> meniuPasirinkimas;
 switch (meniuPasirinkimas)
 {
 case 1:
+    int atsakymasTaipNe;
     cout << "Vardu ir pazymiu registravimas" << endl;
     cout << "========================" << endl;
+    do {
+        cout << "Mokinio vardas: ";
+        if (mokiniuSkaicius < 100) {
+        cin >> Mokiniai[mokiniuSkaicius];
+        mokiniuSkaicius++;
+
+        cout << "Ar norite testi registravima?" << endl;
+        cout << "1. Taip" << endl;
+        cout << "2. Ne" << endl;
+        cout << "Pasirinkite veiksma: ";
+        cin >> atsakymasTaipNe;
+        } 
+    else {
+        cout << "Mokiniu skaicius virsija galima kieki.";
+        break;
+    }
+    }
+
+    while (atsakymasTaipNe !=2);
     break;
 
 case 2:
