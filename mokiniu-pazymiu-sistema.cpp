@@ -7,9 +7,12 @@ using namespace std;
 int main() {
 
 int meniuPasirinkimas;
+int pazymiuSkaicius;
+int pazymis;
 
-string Mokiniai[100];
-int Pazymiai [100][10];
+string MokiniuVardai[100]; // mokiniu vardai
+int Pazymiai[100][10]; // Visi pazymiai, pirmas sk - mokinio indeksas, antras sk - pazymio indeksas
+int MokinioPazymiuSkaicius[100]; // kiek pazymiu turi kiekvienas mokinys
 int mokiniuSkaicius = 0;
 
 do {
@@ -29,14 +32,44 @@ cin >> meniuPasirinkimas;
 
 switch (meniuPasirinkimas)
 {
-case 1:
+case 1: {
     int atsakymasTaipNe;
+
     cout << "Vardu ir pazymiu registravimas" << endl;
     cout << "========================" << endl;
+
     do {
+        if (mokiniuSkaicius >= 100) {
+            cout << "Pasiektas maksimalus mokiniu skaicius." << endl;
+            break;
+        }
+
         cout << "Mokinio vardas: ";
-        if (mokiniuSkaicius < 100) {
-        cin >> Mokiniai[mokiniuSkaicius];
+        cin >> MokiniuVardai[mokiniuSkaicius];
+
+        cout << "Kiek pazymiu norite ivesti (1-10)? ";
+        cin >> pazymiuSkaicius;
+
+        while (pazymiuSkaicius < 1 || pazymiuSkaicius > 10) {
+            cout << "Iveskite skaiciu nuo 1 iki 10: ";
+            cin >> pazymiuSkaicius;
+        }
+
+        MokinioPazymiuSkaicius[mokiniuSkaicius] = pazymiuSkaicius;
+
+        for (int i = 0; i < pazymiuSkaicius; i++) {
+            do {
+                cout << "Iveskite " << i + 1 << " pazymi: ";
+                cin >> pazymis;
+
+                if (pazymis < 1 || pazymis > 10) {
+                    cout << "Pazymis turi buti nuo 1 iki 10." << endl;
+                }
+            } while (pazymis < 1 || pazymis > 10);
+
+            Pazymiai[mokiniuSkaicius][i] = pazymis;
+        }
+
         mokiniuSkaicius++;
 
         cout << "Ar norite testi registravima?" << endl;
@@ -44,15 +77,11 @@ case 1:
         cout << "2. Ne" << endl;
         cout << "Pasirinkite veiksma: ";
         cin >> atsakymasTaipNe;
-        } 
-    else {
-        cout << "Mokiniu skaicius virsija galima kieki.";
-        break;
-    }
-    }
 
-    while (atsakymasTaipNe !=2);
+    } while (atsakymasTaipNe == 1);
+
     break;
+}
 
 case 2:
     cout << "Visu mokiniu pazymiu sarasas" << endl;
